@@ -6,6 +6,8 @@ gem 'pg'
 gem 'will_paginate'
 gem 'validates_timeliness'
 gem 'thin'
+gem 'foreigner'
+gem 'pg_search'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,4 +38,3 @@ group :development do
 end
 
 gem "bcrypt-ruby", :require => "bcrypt"
-

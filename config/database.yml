@@ -29,7 +29,7 @@ development:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: pats_311
+  database: pats
   pool: 5
   username: pats
   password: ferret
