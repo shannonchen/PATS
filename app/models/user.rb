@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   validates_inclusion_of :role, :in => %w( vet assistant ), :message => "is not recognized in the system"
   
   # Other methods
+  scope :alphabetical, order('last_name, first_name')
+  scope :active, where('active = ?', true)
+
   # -----------------------------  
   def proper_name
     first_name + " " + last_name

@@ -1,19 +1,80 @@
 <table>
 	<tr valign="top">	
+
 		<td width="300">
 			<%= render :partial => "owner_data" %>
+			<p class="supertiny">&nbsp;</p>
+			<h3>Add a Note</h3><br />
+
+			<%= form_for([@notable, Note.new], :html => { :class => 'form-horizontal' }) do |f| %>
+			  <fieldset>
+			    <div class="control-group">
+			      <%= f.label :title, :class => 'control-label' %>
+			      <div class="controls">
+			        <%= f.text_field :title %>
+			      </div>
+			    </div>
+			    
+			    <div class="control-group">
+			      <%= f.label :content, :class => 'control-label' %>
+			      <div class="controls">
+			        <%= f.text_area :content, :class => 'text_area', :rows => 4 %>
+			      </div>
+			    </div>
+
+				  <div class="field">
+				    <%= f.label :user_id %><br />
+				    <%= f.collection_select :user_id, User.active.alphabetical, :id, :name, :prompt => "Select ..." %>
+				  </div>
+				 
+				 <div class="field">
+				    <%= f.label :date %><br />
+				    <%= f.date_select :date, :order => [:month, :day, :year] %>
+				 </div>		    
+
+			    <div class="form-actions">
+			      <%= f.submit nil, :class => 'btn btn-primary' %>
+			      <%= link_to 'Cancel', home_path, :class => 'btn' %>
+			    </div>
+			  </fieldset>
+			<% end %>
+
 		</td>
+
 		<td width="10">&nbsp;</td>
+
 		<td width="250">
 			<% unless @current_pets.empty? %>
 			  <%= render :partial => "current_pets" %>
 			<% end %>
 		</td>
+
 	</tr>
+
+			<td width="300">
+				<div id="notes">
+				<% for note in @notes %>
+				  <div class="note">
+				    <strong><%= note.title %></strong><br>
+				    <%= note.content %><br>	
+						by <strong><%= note.user.proper_name %></strong>
+					  <em>on <%= note.date.strftime('%b %d, %Y') %></em>
+				  </div>
+				<% end %>
+				</div>
+			</td>
 </table>
+
+
+
 <p class="smtext">&nbsp;</p>
 <p>&nbsp;
   <%= link_to "Edit", edit_owner_path(@owner) %> |
   <%= link_to "Destroy", @owner, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", owners_path %>
 </p>
+
+
+
+
+
