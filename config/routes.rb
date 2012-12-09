@@ -10,17 +10,17 @@ PATS67272::Application.routes.draw do
   resources :users
   
   # Generated model routes
-  resources :owners
+  resources :owners, :has_many => :notes
   resources :animals
-  resources :pets
-  resources :visits    
-  resources :medicines
+  resources :pets, :has_many => :notes
+  resources :visits, :has_many => :notes
   resources :procedures
   resources :medicine_costs
   resources :procedure_costs
   resources :animal_medicines
   resources :notes
-  
+
+
   # Semi-static page routes
   match 'home' => 'home#index', :as => :home
   match 'about' => 'home#about', :as => :about

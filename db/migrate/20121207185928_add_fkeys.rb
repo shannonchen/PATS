@@ -14,7 +14,7 @@ class AddFkeys < ActiveRecord::Migration
 	add_foreign_key(:medicine_costs, :medicines)
 	add_foreign_key(:notes, :users)
 	
-  end
+  end 
 
   def down
   end
