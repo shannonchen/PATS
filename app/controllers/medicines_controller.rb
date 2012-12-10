@@ -2,7 +2,7 @@ class MedicinesController < ApplicationController
 
   def index
     # finding all the active medicines and paginating that list (will_paginate)
-    @medicines = Medicine.active.alphabetical.paginate(:page => params[:page]).per_page(10)
+    @medicines = Medicine.alphabetical.paginate(:page => params[:page]).per_page(10)
   end
 
   def show
@@ -39,6 +39,12 @@ class MedicinesController < ApplicationController
     else
       render :action => 'edit'
     end
+  end
+
+  def search
+    @query = params[:query]
+    @medicines = Medicine.search_by_medicine(@query)
+    @total_medicine_hits = @medicines.size
   end
 
   def destroy

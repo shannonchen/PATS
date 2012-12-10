@@ -1,6 +1,8 @@
 class Owner < ActiveRecord::Base
+  include PgSearch
   # create a callback that will strip non-digits before saving to db
   before_save :reformat_phone
+
   
   # Relationships
   # -----------------------------
@@ -17,6 +19,8 @@ class Owner < ActiveRecord::Base
   # search for all the owners in the system by either first or last name
   scope :search, lambda { |term| where('first_name LIKE ? OR last_name LIKE ?', "#{term}%", "#{term}%") }
 
+  pg_search_scope :search_by_owner_name, :against => [:first_name, :last_name], :using => :dmetaphone
+  
   # Misc Constants
   # -----------------------------
   # This is a local vet shop, but it is possible to have people coming from WV and OH as well

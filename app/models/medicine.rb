@@ -1,5 +1,7 @@
 class Medicine < ActiveRecord::Base
-  
+  include PgSearch
+  pg_search_scope :search_by_medicine, :against => :description
+
   # Relationships
   # -----------------------------
   has_many :animal_medicines

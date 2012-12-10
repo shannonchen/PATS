@@ -1,4 +1,5 @@
 class Pet < ActiveRecord::Base
+  include PgSearch
 
   # Relationships
   # -----------------------------
@@ -32,6 +33,7 @@ class Pet < ActiveRecord::Base
   # find all pets that have a name like some term or are and animal like some term
   scope :search, lambda { |term| joins(:animal).where('pets.name LIKE ?', "#{term}%").order("pets.name") }
 
+  pg_search_scope :search_by_pet_name, :against => :name, :using => :dmetaphone
 
   # Validations
   # -----------------------------

@@ -1,0 +1,12 @@
+<h2>Search result for description <em>'<%= @query %>'</em> resulted in <%= pluralize(@total_medicine_hits, 'hit') %></h2>
+<p class="supertiny">&nbsp;</p>
+
+<% unless @medicines.empty? %>
+	<p><em><strong>Medicines matching description '<%= @query %>'</strong></em></p>
+	<ul>
+		<% for medicine in @medicines do %>
+			<li><%= link_to medicine.name, medicine_path(medicine) %></li>
+		<% end %>
+	</ul>
+	<p class="smtext">&nbsp;</p>
+<% end %>

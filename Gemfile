@@ -8,6 +8,8 @@ gem 'validates_timeliness'
 gem 'thin'
 gem 'foreigner'
 gem 'pg_search'
+#gem 'therubyracer'
+#gem 'libv8', '~> 3.11.8'
 
 # Gems used only for assets and not required
 # in production environments by default.

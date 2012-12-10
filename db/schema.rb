@@ -11,135 +11,130 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109194651) do
+ActiveRecord::Schema.define(:version => 20121210090311) do
 
   create_table "animal_medicines", :force => true do |t|
-    t.integer  "animal_id"
-    t.integer  "medicine_id"
-    t.integer  "recommended_num_of_units"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.integer "animal_id",                :null => false
+    t.integer "medicine_id",              :null => false
+    t.integer "recommended_num_of_units"
   end
 
   create_table "animals", :force => true do |t|
-    t.string   "name"
-    t.boolean  "active",     :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.string  "name",   :limit => 50,                   :null => false
+    t.boolean "active",               :default => true
   end
 
   create_table "medicine_costs", :force => true do |t|
-    t.integer  "medicine_id"
-    t.integer  "cost_per_unit"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer "medicine_id",   :null => false
+    t.integer "cost_per_unit", :null => false
+    t.date    "start_date"
+    t.date    "end_date"
   end
 
   create_table "medicines", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "stock_amount"
-    t.string   "method"
-    t.string   "unit"
-    t.boolean  "vaccine",      :default => false
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.string  "name",         :limit => 50,                    :null => false
+    t.text    "description",                                   :null => false
+    t.integer "stock_amount",                                  :null => false
+    t.string  "method",       :limit => 50,                    :null => false
+    t.string  "unit",         :limit => 50,                    :null => false
+    t.boolean "vaccine",                    :default => false
   end
 
   create_table "notes", :force => true do |t|
-    t.string   "notable_type"
-    t.integer  "notable_id"
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.date     "date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string  "notable_type", :limit => 50, :null => false
+    t.integer "notable_id",                 :null => false
+    t.string  "title",        :limit => 50, :null => false
+    t.text    "content",                    :null => false
+    t.integer "user_id",                    :null => false
+    t.date    "date",                       :null => false
   end
 
   create_table "owners", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "street"
-    t.string   "city"
-    t.string   "zip"
-    t.string   "phone"
-    t.string   "email"
-    t.boolean  "active",     :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.string   "state",      :default => "PA"
+    t.string  "first_name", :limit => 25,                   :null => false
+    t.string  "last_name",  :limit => 25,                   :null => false
+    t.string  "street",                                     :null => false
+    t.string  "city",       :limit => 50,                   :null => false
+    t.string  "state",      :limit => 2,  :default => "PA"
+    t.string  "zip",        :limit => 12,                   :null => false
+    t.string  "email"
+    t.string  "phone",      :limit => 10
+    t.boolean "active",                   :default => true
   end
 
   create_table "pets", :force => true do |t|
-    t.integer  "animal_id"
-    t.integer  "owner_id"
-    t.string   "name"
-    t.boolean  "female"
-    t.date     "date_of_birth"
-    t.boolean  "active",        :default => true
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.string  "name",          :limit => 25,                   :null => false
+    t.integer "animal_id",                                     :null => false
+    t.integer "owner_id",                                      :null => false
+    t.boolean "female",                      :default => true
+    t.date    "date_of_birth"
+    t.boolean "active",                      :default => true
   end
 
   create_table "procedure_costs", :force => true do |t|
-    t.integer  "procedure_id"
-    t.integer  "cost"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer "procedure_id", :null => false
+    t.integer "cost",         :null => false
+    t.date    "start_date"
+    t.date    "end_date"
   end
 
   create_table "procedures", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "length_of_time"
-    t.boolean  "active",         :default => true
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.string  "name",           :limit => 50,                   :null => false
+    t.text    "description"
+    t.integer "length_of_time",                                 :null => false
+    t.boolean "active",                       :default => true
   end
 
   create_table "treatments", :force => true do |t|
-    t.integer  "visit_id"
-    t.integer  "procedure_id"
-    t.boolean  "successful"
-    t.decimal  "discount",     :precision => 4, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
+    t.integer "visit_id",                      :null => false
+    t.integer "procedure_id",                  :null => false
+    t.boolean "successful"
+    t.decimal "discount",     :default => 0.0
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "role"
-    t.string   "password_digest"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.boolean  "active",          :default => true
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.string  "first_name",      :limit => 25,                    :null => false
+    t.string  "last_name",       :limit => 25,                    :null => false
+    t.string  "role",            :limit => 50,                    :null => false
+    t.string  "username",        :limit => 100,                   :null => false
+    t.string  "password_digest",                                  :null => false
+    t.boolean "active",                         :default => true
   end
 
+  add_index "users", ["username"], :name => "unique_username", :unique => true
+
   create_table "visit_medicines", :force => true do |t|
-    t.integer  "visit_id"
-    t.integer  "medicine_id"
-    t.integer  "units_given"
-    t.decimal  "discount",    :precision => 4, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.integer "visit_id",                     :null => false
+    t.integer "medicine_id",                  :null => false
+    t.integer "units_given",                  :null => false
+    t.decimal "discount",    :default => 0.0
   end
 
   create_table "visits", :force => true do |t|
-    t.integer  "pet_id"
-    t.date     "date"
-    t.integer  "weight"
-    t.text     "notes"
-    t.boolean  "overnight_stay"
-    t.integer  "total_charge"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer "pet_id",                        :null => false
+    t.date    "date",                          :null => false
+    t.integer "weight"
+    t.boolean "overnight_stay"
+    t.integer "total_charge",   :default => 0
   end
+
+  add_foreign_key "animal_medicines", "animals", :name => "animal_fk", :dependent => :restrict
+  add_foreign_key "animal_medicines", "medicines", :name => "medicine_fk", :dependent => :restrict
+
+  add_foreign_key "medicine_costs", "medicines", :name => "medicine_fk", :dependent => :delete
+
+  add_foreign_key "notes", "users", :name => "user_fk", :dependent => :restrict
+
+  add_foreign_key "pets", "animals", :name => "animal_fk", :dependent => :restrict
+  add_foreign_key "pets", "owners", :name => "owner_fk", :dependent => :restrict
+
+  add_foreign_key "procedure_costs", "procedures", :name => "procedure_fk", :dependent => :delete
+
+  add_foreign_key "treatments", "procedures", :name => "procedure_fk", :dependent => :restrict
+  add_foreign_key "treatments", "visits", :name => "visit_fk", :dependent => :restrict
+
+  add_foreign_key "visit_medicines", "medicines", :name => "medicine_fk", :dependent => :restrict
+  add_foreign_key "visit_medicines", "visits", :name => "visit_fk", :dependent => :restrict
+
+  add_foreign_key "visits", "pets", :name => "pet_fk", :dependent => :restrict
 
 end

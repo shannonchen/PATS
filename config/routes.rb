@@ -41,6 +41,7 @@ PATS67272::Application.routes.draw do
   match 'contact' => 'home#contact', :as => :contact
   match 'privacy' => 'home#privacy', :as => :privacy
   match 'search' => 'home#search', :as => :search
+  match 'medicines_search' => 'medicines#search', :as => :medicines_search
   
   # Set the root url
   root :to => 'home#index'

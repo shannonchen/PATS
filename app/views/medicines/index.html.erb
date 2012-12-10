@@ -1,6 +1,12 @@
 <h1>Medicines offered by PATS</h1><br>
 
 <table class="datagrid">
+  <li>
+      <%= form_tag(medicines_search_path) do %>
+        <%= text_field_tag('query', '', :size => 12) %>
+        <%= submit_tag('Find') %>
+      <% end %>
+</li>
   <thead class="datagrid">
     <th>Medicine</th>
     <th>Method</th>
