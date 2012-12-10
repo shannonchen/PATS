@@ -31,8 +31,8 @@ development:
   host: localhost
   database: pats
   pool: 5
-  username: sheilach
-  password: L0velyD@y
+  username: pats
+  password: ferret
 
 test:
   adapter: postgresql

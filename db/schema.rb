@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210090311) do
+ActiveRecord::Schema.define(:version => 20121210173303) do
 
   create_table "animal_medicines", :force => true do |t|
     t.integer "animal_id",                :null => false
@@ -19,10 +19,15 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.integer "recommended_num_of_units"
   end
 
+  add_index "animal_medicines", ["animal_id"], :name => "animal_medicine_animal_idx"
+  add_index "animal_medicines", ["medicine_id"], :name => "animal_medicine_medicine_idx"
+
   create_table "animals", :force => true do |t|
     t.string  "name",   :limit => 50,                   :null => false
     t.boolean "active",               :default => true
   end
+
+  add_index "animals", ["name"], :name => "animals_name_idx"
 
   create_table "medicine_costs", :force => true do |t|
     t.integer "medicine_id",   :null => false
@@ -30,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.date    "start_date"
     t.date    "end_date"
   end
+
+  add_index "medicine_costs", ["end_date"], :name => "current_medicine_cost"
 
   create_table "medicines", :force => true do |t|
     t.string  "name",         :limit => 50,                    :null => false
@@ -40,6 +47,8 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.boolean "vaccine",                    :default => false
   end
 
+  add_index "medicines", ["name"], :name => "medicines_name_idx"
+
   create_table "notes", :force => true do |t|
     t.string  "notable_type", :limit => 50, :null => false
     t.integer "notable_id",                 :null => false
@@ -48,6 +57,9 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.integer "user_id",                    :null => false
     t.date    "date",                       :null => false
   end
+
+  add_index "notes", ["notable_type", "notable_id"], :name => "notes_noteable_idx"
+  add_index "notes", ["user_id"], :name => "notes_user_idx"
 
   create_table "owners", :force => true do |t|
     t.string  "first_name", :limit => 25,                   :null => false
@@ -61,6 +73,9 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.boolean "active",                   :default => true
   end
 
+  add_index "owners", ["email"], :name => "owners_email_idx"
+  add_index "owners", ["street", "city", "state", "zip"], :name => "owners_address_idx"
+
   create_table "pets", :force => true do |t|
     t.string  "name",          :limit => 25,                   :null => false
     t.integer "animal_id",                                     :null => false
@@ -70,12 +85,18 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.boolean "active",                      :default => true
   end
 
+  add_index "pets", ["animal_id"], :name => "pets_animal_idx"
+  add_index "pets", ["owner_id"], :name => "pets_owner_idx"
+
   create_table "procedure_costs", :force => true do |t|
     t.integer "procedure_id", :null => false
     t.integer "cost",         :null => false
     t.date    "start_date"
     t.date    "end_date"
   end
+
+  add_index "procedure_costs", ["end_date"], :name => "current_procedure_cost"
+  add_index "procedure_costs", ["procedure_id"], :name => "procedure_costs_procedure_idx"
 
   create_table "procedures", :force => true do |t|
     t.string  "name",           :limit => 50,                   :null => false
@@ -84,12 +105,17 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.boolean "active",                       :default => true
   end
 
+  add_index "procedures", ["name"], :name => "procedures_name_idx"
+
   create_table "treatments", :force => true do |t|
     t.integer "visit_id",                      :null => false
     t.integer "procedure_id",                  :null => false
     t.boolean "successful"
     t.decimal "discount",     :default => 0.0
   end
+
+  add_index "treatments", ["procedure_id"], :name => "treatments_procedure_idx"
+  add_index "treatments", ["visit_id"], :name => "treatments_visit_idx"
 
   create_table "users", :force => true do |t|
     t.string  "first_name",      :limit => 25,                    :null => false
@@ -101,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
   end
 
   add_index "users", ["username"], :name => "unique_username", :unique => true
+  add_index "users", ["username"], :name => "user_username_idx"
 
   create_table "visit_medicines", :force => true do |t|
     t.integer "visit_id",                     :null => false
@@ -109,6 +136,9 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.decimal "discount",    :default => 0.0
   end
 
+  add_index "visit_medicines", ["medicine_id"], :name => "visit_medicine_medicine_idx"
+  add_index "visit_medicines", ["visit_id"], :name => "visit_medicine_visit_idx"
+
   create_table "visits", :force => true do |t|
     t.integer "pet_id",                        :null => false
     t.date    "date",                          :null => false
@@ -116,6 +146,9 @@ ActiveRecord::Schema.define(:version => 20121210090311) do
     t.boolean "overnight_stay"
     t.integer "total_charge",   :default => 0
   end
+
+  add_index "visits", ["date"], :name => "visits_date_idx"
+  add_index "visits", ["pet_id"], :name => "visits_pet_idx"
 
   add_foreign_key "animal_medicines", "animals", :name => "animal_fk", :dependent => :restrict
   add_foreign_key "animal_medicines", "medicines", :name => "medicine_fk", :dependent => :restrict

@@ -21,6 +21,7 @@ class NotesController < ActionController::Base
 	  end
 	end
 
+# have the things be set as current user and current date
 
 	def edit
   	end	
