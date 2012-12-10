@@ -20,9 +20,7 @@
     <fieldset>
 
     <%= f.input :title %>
-
-      <%= f.input :content, :input_html => { :rows => 4 } %>
-
+    <%= f.input :content, :input_html => { :rows => 4 } %>
     <%= f.hidden_field :user_id, :value => current_user.id %> 
     <%= f.hidden_field :date, :value => Date.today %> 
       
@@ -35,13 +33,13 @@
   <% end %>
 
 
-  <div id="notes">
+<div id="notes">
 <% for note in @notes %>
   <div class="note">
     <strong><%= note.title %></strong><br>
-    <%= note.content %><br>	
-		by <strong><%= note.user.proper_name %></strong>
-	  <em>on <%= note.date.strftime('%b %d, %Y') %></em>
+    <%= note.content %><br> 
+    by <strong><%= note.user.proper_name %></strong>
+    <em>on <%= note.date.strftime('%b %d, %Y') %></em>
   </div>
 <% end %>
 </div>
