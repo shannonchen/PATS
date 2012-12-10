@@ -1,6 +1,6 @@
 class Medicine < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search_by_medicine, :against => :description
+  pg_search_scope :search_by_medicine, :against => :description, :using => {:tsearch => {:dictionary => "english"}}
 
   # Relationships
   # -----------------------------
