@@ -1,10 +1,47 @@
 <table>
 	<tr valign="top">			
-		<%= render :partial => "pet_data" %>		
-	
+		<%= render :partial => "pet_data" %>	
+
+
 		<% unless @recent_visits.empty? %>
 		  <%= render :partial => "recent_visits" %>
 		<% end %>
 	</tr>
+
+
+
+
 </table>
+
 <p class="supertiny">&nbsp;</p>
+<h3>Add a Note</h3><br/>
+
+  <%= simple_form_for [@notable, Note.new], :html => { :class => 'form-horizontal' } do |f| %>
+    <fieldset>
+
+    <%= f.input :title %>
+
+      <%= f.input :content, :input_html => { :rows => 4 } %>
+
+    <%= f.hidden_field :user_id, :value => current_user.id %> 
+    <%= f.hidden_field :date, :value => Date.today %> 
+      
+      <div class="form-actions">
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to 'Cancel', home_path, :class => 'btn' %>
+      </div>
+
+    </fieldset>
+  <% end %>
+
+
+  <div id="notes">
+<% for note in @notes %>
+  <div class="note">
+    <strong><%= note.title %></strong><br>
+    <%= note.content %><br>	
+		by <strong><%= note.user.proper_name %></strong>
+	  <em>on <%= note.date.strftime('%b %d, %Y') %></em>
+  </div>
+<% end %>
+</div>

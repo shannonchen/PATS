@@ -19,17 +19,9 @@
   <strong>Weight:</strong>
   <%= @visit.weight %> lbs.
 </p>
-<% unless @vaccinations.empty? %>
-	<p>
-	  <strong>Vaccinations:</strong>
-	  <% for vaccination in @vaccinations %>
-		<%= link_to vaccination.vaccine.name, vaccination_path(vaccination) %>
-	  <% end %>
-	</p>
+
 <p>
-<% end %>
-  <strong>Notes:</strong>
-  <%= @visit.notes %>
+
 </p>
 <p class="supertiny">&nbsp;</p>
 <p>
@@ -37,3 +29,39 @@
   <%= link_to "Destroy", @visit, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", visits_path %>
 </p>
+
+
+      <td width="300">
+        <div id="notes">
+        <% for note in @notes %>
+          <div class="note">
+            <strong><%= note.title %></strong><br>
+            <%= note.content %><br>  
+            by <strong><%= note.user.proper_name %></strong>
+            <em>on <%= note.date.strftime('%b %d, %Y') %></em>
+          </div>
+        <% end %>
+        </div>      
+      </td>
+
+
+      <p class="supertiny">&nbsp;</p>
+      <h3>Add a Note</h3><br/>
+
+        <%= simple_form_for [@notable, Note.new], :html => { :class => 'form-horizontal' } do |f| %>
+          <fieldset>
+
+          <%= f.input :title %>
+
+            <%= f.input :content, :input_html => { :rows => 4 } %>
+
+          <%= f.hidden_field :user_id, :value => current_user.id %> 
+          <%= f.hidden_field :date, :value => Date.today %> 
+            
+            <div class="form-actions">
+              <%= f.submit nil, :class => 'btn btn-primary' %>
+              <%= link_to 'Cancel', home_path, :class => 'btn' %>
+            </div>
+
+          </fieldset>
+        <% end %>

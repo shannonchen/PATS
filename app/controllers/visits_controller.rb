@@ -8,9 +8,9 @@ class VisitsController < ApplicationController
     # get the data for this particular visit
     @visit = Visit.find(params[:id])
     # get all the vaccinations associated with this visit, if any
-    @vaccinations = @visit.vaccinations
-    @notes = @vist.note
-    @noteable = @visit
+    # @vaccinations = @visit.vaccinations
+    @notes = @visit.notes
+    @notable = @visit
   end
   
   def new
