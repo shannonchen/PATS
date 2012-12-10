@@ -3,41 +3,27 @@
 
 		<td width="300">
 			<%= render :partial => "owner_data" %>
+			
 			<p class="supertiny">&nbsp;</p>
-			<h3>Add a Note</h3><br />
+			<h3>Add a Note</h3><br/>
 
-			<%= form_for([@notable, Note.new], :html => { :class => 'form-horizontal' }) do |f| %>
-			  <fieldset>
-			    <div class="control-group">
-			      <%= f.label :title, :class => 'control-label' %>
-			      <div class="controls">
-			        <%= f.text_field :title %>
-			      </div>
-			    </div>
-			    
-			    <div class="control-group">
-			      <%= f.label :content, :class => 'control-label' %>
-			      <div class="controls">
-			        <%= f.text_area :content, :class => 'text_area', :rows => 4 %>
-			      </div>
-			    </div>
+				<%= simple_form_for [@notable, Note.new], :html => { :class => 'form-horizontal' } do |f| %>
+				  <fieldset>
 
-				  <div class="field">
-				    <%= f.label :user_id %><br />
-				    <%= f.collection_select :user_id, User.active.alphabetical, :id, :name, :prompt => "Select ..." %>
-				  </div>
-				 
-				 <div class="field">
-				    <%= f.label :date %><br />
-				    <%= f.date_select :date, :order => [:month, :day, :year] %>
-				 </div>		    
+					<%= f.input :title %>
 
-			    <div class="form-actions">
-			      <%= f.submit nil, :class => 'btn btn-primary' %>
-			      <%= link_to 'Cancel', home_path, :class => 'btn' %>
-			    </div>
-			  </fieldset>
-			<% end %>
+				    <%= f.input :content, :input_html => { :rows => 4 } %>
+
+					<%= f.hidden_field :user_id, :value => current_user.id %> 
+					<%= f.hidden_field :date, :value => Date.today %> 
+				    
+				    <div class="form-actions">
+				      <%= f.submit nil, :class => 'btn btn-primary' %>
+				      <%= link_to 'Cancel', home_path, :class => 'btn' %>
+				    </div>
+
+				  </fieldset>
+				<% end %>
 
 		</td>
 
@@ -73,7 +59,6 @@
   <%= link_to "Destroy", @owner, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", owners_path %>
 </p>
-
 
 
 

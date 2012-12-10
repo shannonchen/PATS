@@ -13,6 +13,7 @@ class NotesController < ActionController::Base
 	def create
 	  @notable = find_notable
 	  @note = @notable.notes.build(params[:note])
+	  # @user = current_user
 	  if @note.save
 	    flash[:notice] = "Successfully created note."
 	    redirect_to @notable
@@ -21,7 +22,6 @@ class NotesController < ActionController::Base
 	  end
 	end
 
-# have the things be set as current user and current date
 
 	def edit
   	end	
