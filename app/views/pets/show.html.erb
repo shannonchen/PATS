@@ -8,38 +8,48 @@
 		<% end %>
 	</tr>
 
-
-
-
 </table>
 
-<p class="supertiny">&nbsp;</p>
-<h3>Add a Note</h3><br/>
+<h3><font color="black">Notes:</h3></font> 
+  <div id="notes">
+  <% for note in @notes %>
+    <div class="note">
+      <strong><%= note.title %></strong><br>
+      <%= note.content %><br> 
+      by <strong><%= note.user.proper_name %></strong>
+      <em>on <%= note.date.strftime('%b %d, %Y') %></em>
+      <p>
+
+      </p>
+    </div>
+  <% end %>
+  </div>
+
+
+  <p class="supertiny">&nbsp;</p>
+<h3><font color="black">Add a Note</h3></font> 
 
   <%= simple_form_for [@notable, Note.new], :html => { :class => 'form-horizontal' } do |f| %>
     <fieldset>
-
-    <%= f.input :title %>
-    <%= f.input :content, :input_html => { :rows => 4 } %>
+    <div class="control-group">
+      <%= f.label :title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <%= f.label :content, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :content, :class => 'text_area', :rows => 4 %>
+      </div>
+    </div>
     <%= f.hidden_field :user_id, :value => current_user.id %> 
     <%= f.hidden_field :date, :value => Date.today %> 
       
-      <div class="form-actions">
+    <div class="form-actions">
         <%= f.submit nil, :class => 'btn btn-primary' %>
         <%= link_to 'Cancel', home_path, :class => 'btn' %>
-      </div>
-
+    </div>
     </fieldset>
-  <% end %>
-
-
-<div id="notes">
-<% for note in @notes %>
-  <div class="note">
-    <strong><%= note.title %></strong><br>
-    <%= note.content %><br> 
-    by <strong><%= note.user.proper_name %></strong>
-    <em>on <%= note.date.strftime('%b %d, %Y') %></em>
-  </div>
 <% end %>
-</div>
