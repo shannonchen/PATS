@@ -1,3 +1,1 @@
-This is a basic Rails app designed for our Database Design and Implementation 
-
-This project does require the use of several gems to work properly.  Check the Gemfile to see which gems are used.  Also, testing requires the gems factory_girl and shoulda be installed before running tests.
+This is a basic Rails app designed for our Database Design and Implementation course.

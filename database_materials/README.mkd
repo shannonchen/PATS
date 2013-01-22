@@ -1,11 +1,1 @@
-PATS Phase 2 Solutions 
-------------
-This contains the solution to Phase 2 that we are using (in part) moving forward into Phase 3.  Phase 3 is cut back due to time constraints, so a fair amount of the functionality is not directly incorporated in that phase.  More instructions for Phase 3 can be found on the course website at http://cmu-is-311.org.
-
-In the pats_data.sql file there is test data for 120 owners and 237 pets representing 5 animal types.  In addition there are 9 procedures, 10 medicines (with 23 connections to animals) and each medicine/procedure has one older cost as well as a current cost.  The medicines are realistic, but no guarantee is made regarding the scientific accuracy of the data.  Moreover, there are 1949 visits which connect to 4531 treatments and 1475 visit_medicine applications.  In short, there should be enough realistic test data for you to work with in this phase.  If you have constructed your tables correctly, there should be no problem loading this data.
-
-```  
- NOTE: in this case do not replace the 'pats' owner with your own db owner name in the data files 
- before trying to load the database.  The ownership is already set to a user called 'pats' so simply 
- create a new user 'pats' on your local machine who owns the pats db.
-```
+PATS
